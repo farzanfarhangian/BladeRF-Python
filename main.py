@@ -12,7 +12,7 @@ import csv
 import struct
 import sys
 from   pathlib import Path
-###############################################################################3
+
 def chunked_read( fobj, chunk_bytes = 4*1024 ):
     while True:
         data = fobj.read(chunk_bytes)
@@ -20,7 +20,8 @@ def chunked_read( fobj, chunk_bytes = 4*1024 ):
             break
         else:
             yield data
-###############################################################################
+
+
 def bin2csv( binfile = None, csvfile = None, chunk_bytes = 4*1024 ):
     with open(binfile, 'rb') as b:
         with open(csvfile, 'w') as c:
@@ -34,7 +35,7 @@ def bin2csv( binfile = None, csvfile = None, chunk_bytes = 4*1024 ):
                     csvwriter.writerow( [sig_i, sig_q] )
     print( "Processed", str(count//2//2), "samples." )
 
-##################################################################################
+
 d = bladerf.BladeRF()
 rx = d.Channel(bladerf.CHANNEL_RX(0))
 info=d.get_devinfo()
@@ -45,8 +46,8 @@ print("Sampling rate: {:d} Hz".format(fs))
 d.set_frequency(0, int(137500000))                        # enter your center frequency in Hz
 f=d.get_frequency(0)
 print("Frequency: {:d} Hz".format(f))
-#d.get_loopback_modes()
-#d.get_rx_mux()
+
+
 rx.frequency = 137500000  # enter your center frequency in Hz
 rx.sample_rate = 2000000  # enter your sampling rate in Hz
 rx.gain = 1               # enter your gain
